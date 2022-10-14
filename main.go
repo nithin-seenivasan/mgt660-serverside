@@ -49,8 +49,8 @@ func attendeesHandler(w http.ResponseWriter, r *http.Request) {
 
 		for i := 0; i < len(contextData.Attendees); i++ {
 			if strings.Contains(strings.ToLower(contextData.Attendees[i]),statementOfLove) {
-				//var args []string = []string{contextData.Attendees[i]}
-				attendeesTemplate.Execute(w, contextData)
+				var args []string = []string{contextData.Attendees[i]}
+				attendeesTemplate.Execute(w, party{Attendees: args})
 			} 			
 		}
 
