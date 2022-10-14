@@ -1,3 +1,18 @@
+#Your steps to deploy to Heroku 
+1. Start Github Codespace on the main, make necessary changes and test it in local host
+2. Use Github desktop to clone the repo in the Yale Org to local 
+3. Navigate to the repo folder using cd -LiteralPath "the absolute path"
+4. Use heroku login (Opens browser window to login) , heroku create (Creates new app, sets it to main), git push heroku main (Pushes the local repo to Heroku)
+5. Access the app using the URL on Heroku 
+
+#Steps to clone the Org repo to local 
+1. Create an empty repo in your private repo
+2. Navigate to the local repo that was cloned from the workspace using cd
+3. Use git push --mirror https://github.com/nithin-seenivasan/mgt660-serverside.git (replace the last bit with the URL)
+4. It'll get cloned with all the history!
+
+---------------------------------------------------------------------------------------------------------------------
+
 # MVC Homework
 
 This is the README for the starter code of the
