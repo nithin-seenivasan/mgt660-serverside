@@ -44,7 +44,18 @@ func attendeesHandler(w http.ResponseWriter, r *http.Request) {
 	lovedThings, foundLovedThings := r.URL.Query()["q"]
 	if foundLovedThings {
 		statementOfLove = strings.ToLower(lovedThings[0])
+		//fmt.Fprint(w, statementOfLove)
+		//fmt.Fprint(w, contextData)
+
 		for i := 0; i < len(contextData.Attendees); i++ {
+			if strings.Contains(strings.ToLower(contextData.Attendees[i]),statementOfLove) {
+				//var args []string = []string{contextData.Attendees[i]}
+				attendeesTemplate.Execute(w, contextData)
+			} 			
+		}
+
+
+/* 		for i := 0; i < len(contextData.Attendees); i++ {
 			if strings.Contains(contextData.Attendees[i],statementOfLove) {
 				fmt.Fprintf(w, contextData.Attendees[i])
 			} else {
@@ -52,7 +63,7 @@ func attendeesHandler(w http.ResponseWriter, r *http.Request) {
 				//fmt.Fprintf(w, "No matching name found")
 			}
 			
-		}
+		} */
 	} else {
 		attendeesTemplate.Execute(w, contextData)
 	}
