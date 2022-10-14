@@ -38,7 +38,30 @@ func attendeesHandler(w http.ResponseWriter, r *http.Request) {
 	// defined in `models.go`. It has just one field called
 	// `Attendees`, which is an array of strings.
 	contextData := party{Attendees: people}
-	attendeesTemplate.Execute(w, contextData)
+	//attendeesTemplate.Execute(w, contextData)
+
+	statementOfLove := ""
+	lovedThings, foundLovedThings := r.URL.Query()["q"]
+	if foundLovedThings {
+		statementOfLove = strings.ToLower(lovedThings[0])
+		for i := 0; i < len(contextData.Attendees); i++ {
+			if strings.Contains(contextData.Attendees[i],statementOfLove) {
+				fmt.Fprintf(w, contextData.Attendees[i])
+			} else {
+				fmt.Fprintf(w, contextData.Attendees[i])
+				//fmt.Fprintf(w, "No matching name found")
+			}
+			
+		}
+	} else {
+		attendeesTemplate.Execute(w, contextData)
+	}
+	
+}
+
+
+func nicknameHandler(w http.ResponseWriter, r *http.Request){
+	fmt.Fprintf(w, "powerful-spider")
 }
 
 func getEnv(key, fallback string) string {
@@ -53,5 +76,7 @@ func main() {
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/love", loveHandler)
 	http.HandleFunc("/attendees", attendeesHandler)
+	http.HandleFunc("/Nickname", nicknameHandler)
+	http.HandleFunc("/nickname", nicknameHandler)
 	http.ListenAndServe(":"+getEnv("PORT", "8080"), nil)
 }
